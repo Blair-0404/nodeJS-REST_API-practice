@@ -167,7 +167,6 @@ server.delete('/api/user/:id', (req, res) => {
 ...
 ````
 * 이제 특정 사용자의 아이디를 url담아서 delete api날리면
-
 <img src="./img/del.png" width="300"/>
 
 * 그리고 다시 Get으로 모든 users 확인해보면 삭제가 반영되어있다.
