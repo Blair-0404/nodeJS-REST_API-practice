@@ -171,4 +171,38 @@ server.delete('/api/user/:id', (req, res) => {
 
 * 그리고 다시 Get으로 모든 users 확인해보면 삭제가 반영되어있다.
 <img src="./img/delRet.png" width="300"/>
- da
+ 
+ 
+## MongoDB 구축하기 (useMongoDB 경로에서 작업)
+* 로그인 후 클러스터 생성하기
+* connect
+    * 중요한 프젝은 아니기때문에 0.0.0.0로 모든 아이피 허용 / root/123
+    
+
+### 새 폴더 만들고 셋업하기 - useMongoDB 폴더생성
+1. useMongoDB 경로로 들어와서 npm init --y : default package.json이 바로 생성된다.
+2. npm install express mongoose
+3. 몽고디비 주소에는 개인정보가 있으니 .env파일 생성해서 여기에 담기
+    * MONGODB_URL = mongodb+srv://ID:PW@cluster0-kvscn.mongodb.net/<dbname>?retryWrites=true&w=majority
+4. useMongoDB/index.js 파일 생성하기
+    * npn install dotenv설치 후 config함수실행하고 파일명(경로) 인자넣기 
+        * .env파일의 환경변수를 다른곳에서 편하게 "precess.env.변수명" 으로 접근 가능하게하기 위해서!
+    * 몽구스 require -> 몽구스와 몽고디비 연결(인자로 .env의 몽고디비 아이디불러와서 넣기)
+    
+````javascript
+// useMongoDB/index.js
+
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
+dotenv.config({path:'.env'}); // 설치한 dotenv사용위해 config메소드실행하고 경로인자 넣어주기
+// 혹은 require하면서 바로 연결해줘도 된다.require('dotenv').config({path:'.env'});
+
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser : true}, (err) => {  // 생성했던 몽고디비를 몽구스에 연결
+  if(err) { // 콜백함수로 연결실패히 err 출력
+    console.log(err)
+  } else { // 연결 성공시 성공 메세지 출력
+    console.log("* Connected to database successfully *");
+  }
+});
+````
