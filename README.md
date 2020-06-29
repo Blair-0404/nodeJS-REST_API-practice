@@ -1,4 +1,4 @@
-# REST API practice
+# nodeJS-REST_API-practice
 * rest api는 정보는 주고받는 자체라서 클라이언트에서 해주기보다는 서버에서 comfiguration 해주는 것이 관건이다.
 * nodeJS 다운받기, npm 다운받기
 * node를 다운받으면 npm(node package manager) 이 같이 딸려오는데 이것은 node.js에서 필요한 모듈들을 다운받을 수 있게 도와주는 매니저이다.
@@ -91,7 +91,7 @@ server.post('/api/user', (req, res) => {
 *  console.log(req.body); 를 해줬기 때문에 서버쪽(터미널)에 클라이언트가 보낸 정보가 console.log 됨
 <img src="./img/postResult.png" width="300"/>
 *   res.json(users); 로 추가해줬기 때문에 브라우저에 찍힌 res.json(users)의 결과는 기존 data 에 추가됨 
-<img src="./img/addUsers.png"width="300"/>
+<img src="./img/addUsers.png" width="300"/>
 
 ### GET 요청시 특정한 유저의 정보를 얻을 - ID parameter설정하기때
 * 클라이언트가 특정유저의 id를 url에 담아서 get요청을 서버에 보내고 서버에서 확인해서 응답해주기
@@ -118,9 +118,9 @@ server.get('/api/user/:id', (req, res) => {
 
 ````
 * 유저 찾았을 때
-<img src="./img/isUser.png"width="300"/>
+<img src="./img/isUser.png" width="300"/>
 * 데이터에 없는 유저를 파라미터로 받았을 때
-<img src="./img/notUser.png"width="300"/>
+<img src="./img/notUser.png" width="300"/>
 
 
 ### PUT API - data Update
@@ -144,9 +144,9 @@ server.put('/api/user/:id', (req, res) => {
 ````
 * postman에서 Headers를 
     * Content-Type : application/json 로 설정 후 api날려보기
-<img src="./img/put.png"width="300"/>
+<img src="./img/put.png" width="300"/>
 * 이제 다시 Get으로 모든 users 확인해보면 수정이 반영되어있다.
-<img src="./img/repair.png"width="300"/>
+<img src="./img/repair.png" width="300"/>
 
 
 ### DELETE API - data Delete
@@ -167,7 +167,8 @@ server.delete('/api/user/:id', (req, res) => {
 ...
 ````
 * 이제 특정 사용자의 아이디를 url담아서 delete api날리면
-<img src="./img/del.png"width="300"/>
+
+<img src="./img/del.png" width="300"/>
+
 * 그리고 다시 Get으로 모든 users 확인해보면 삭제가 반영되어있다.
-<img src="./img/delRet.png"width="300"/>
-# nodeJS-REST_API-practice
+<img src="./img/delRet.png" width="300"/>
