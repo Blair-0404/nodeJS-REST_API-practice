@@ -171,3 +171,4 @@ server.delete('/api/user/:id', (req, res) => {
 
 * 그리고 다시 Get으로 모든 users 확인해보면 삭제가 반영되어있다.
 <img src="./img/delRet.png" width="300"/>
+ da
