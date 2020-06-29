@@ -31,6 +31,7 @@ server.listen(3000, () => { // 포트 열어주고 서버에세 전달
 * Post or Get 요청으로 유저 Create, Read
 * Put or Delete 요청으로 유저 Update, Delete
 
+*** 
 
 ## mockup data 생성해서 REST API 테스트 해보기 (아직 mongoDB 사용을 안하므로)
 * db가 따로 없어서 테스트용으로 간단히 유저생성
@@ -172,6 +173,7 @@ server.delete('/api/user/:id', (req, res) => {
 * 그리고 다시 Get으로 모든 users 확인해보면 삭제가 반영되어있다.
 <img src="./img/delRet.png" width="300"/>
  
+*** 
  
 ## MongoDB 구축하기 (useMongoDB 경로에서 작업)
 * 로그인 후 클러스터 생성하기
@@ -206,3 +208,100 @@ mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser : true}, (err) => { 
   }
 });
 ````
+### model생성
+* [mongoose 문서참고](https://mongoosejs.com/docs/models.html)
+* 문서 형식에 맞춰서 만들어 줘야 한다.
+* models 폴더 생성 -> User.js 파일 생성
+    * 모델파일들은 모두 대문자
+    
+#### User.js (User 모델 생성)
+* mongoose불러오고 스키마 불러와서 스키마를 만들수있게 셋팅하기
+````javascript
+// useMongoDB/models/User.js
+
+const mongoose = require('mongoose');
+// const Schema = mongoose.Schema
+const {Schema} = mongoose; // 위와 같다.(구조분해 할당)
+
+
+// 스키마 폼 생성
+const userSchema = new Schema({
+    email: {
+      type: String,
+      required: true
+    },
+    name: String,
+    age: {
+      type: Number,
+      min: 18,
+      max: 50
+    }
+  },
+  {
+    timestamps: true // 데이터 생성한 시점, 수정될경우 시점이 기록된다.
+  }
+);
+
+module.exports = mongoose.model('User', userSchema); // 생성된 모델을 사용할 수 있게 exports 시켜주기
+````
+
+### express로 서버 생성 후 포트열고 -> 몽고디비 연결하기!
+````javascript
+// useMongoDB/index.js 수정!!
+
+const express = require('express'); // 서버만들기위해 require
+const mongoose = require('mongoose');
+const server = express(); // 서버생성
+const dotenv = require('dotenv');
+dotenv.config({path:'.env'}); 
+
+server.listen(3000, (err) => { // 포트지정해서 서버 열고
+  if(err) {
+    console.log(err);
+  } else { // 서버가 잘 열리면 몽고디비 바로 연결
+    mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser : true}, (err) => {  // 생성했던 몽고디비를 몽구스에 연결
+      if(err) { // 몽고디비 연결실패 err 출력
+        console.log(err)
+      } else { // 연결 성공시 성공 메세지 출력
+        console.log("* Connected to database successfully *");
+      }
+    });
+  }
+});
+````
+
+### 생성했던 모델 사용해보기! - GET요청 (index.js에 코드 추가)
+````javascript
+// useMongoDB/index.js 수정!!
+...
+const User = require('./models/User'); // 모델을 사용하기 위해 rewuire 해주기
+...
+// GET - 사용자가 '/'로 접속시 User model 만드는 요청 실행
+server.get('/', (req, res) => {
+  const newUser = new User();
+  newUser.email = "blair04@gmail.com"; // 모델스키마에 잡아놨던 폼의 속성마다 값 넣어주기
+  newUser.name = "블레어";
+  newUser.age = 1;
+
+  // 위에서 만들 uewUse(새로만든 User모델을) mondoDB에 저장 (프라미스객체 돌려준다)
+  newUser.save()
+    .then((user) => { // 저장이 잘 됬다면
+      console.log(user);
+      res.json({
+        message: "User Create Successfully"
+      });
+    })
+    .catch((error) => { // 저장 실패하면
+      res.json({
+        message: "User wad not successfully created",
+        err: error.toString()
+      })
+    })
+});
+...
+````
+
+* 이제 브라우저에서 "http://localhost:3000/"에 접속해보면 
+<img src="./img/createModel.png" width="300"/>
+* 그리고 서버쪽에도 생성된 user가 찍힌다.
+<img src="./img/createUser.png" width="300"/>
