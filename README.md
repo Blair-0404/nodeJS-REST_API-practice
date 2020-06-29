@@ -64,7 +64,7 @@ server.get('/api/user', (req, res) => { // client에서 /api/user endpoint이동
 ...
 ````
 * 이제 브라우저에서 http://localhost:3000/api/user 접속시 아래처럼 서버가 보낸 데이터들이 보인다.
-<img src="./img/users.png" width="300"/>
+<img src="./img/users.png" width="400"/>
 
 ### POST API test
 * postman에서 Headers를 
@@ -88,11 +88,11 @@ server.post('/api/user', (req, res) => {
 ...
 ````
 * postman에서 post test
-<img src="./img/post.png" width="300"/>
+<img src="./img/post.png" width="400"/>
 *  console.log(req.body); 를 해줬기 때문에 서버쪽(터미널)에 클라이언트가 보낸 정보가 console.log 됨
-<img src="./img/postResult.png" width="300"/>
+<img src="./img/postResult.png" width="400"/>
 *   res.json(users); 로 추가해줬기 때문에 브라우저에 찍힌 res.json(users)의 결과는 기존 data 에 추가됨 
-<img src="./img/addUsers.png" width="300"/>
+<img src="./img/addUsers.png" width="400"/>
 
 ### GET 요청시 특정한 유저의 정보를 얻을 - ID parameter설정하기때
 * 클라이언트가 특정유저의 id를 url에 담아서 get요청을 서버에 보내고 서버에서 확인해서 응답해주기
@@ -119,9 +119,9 @@ server.get('/api/user/:id', (req, res) => {
 
 ````
 * 유저 찾았을 때
-<img src="./img/isUser.png" width="300"/>
+<img src="./img/isUser.png" width="400"/>
 * 데이터에 없는 유저를 파라미터로 받았을 때
-<img src="./img/notUser.png" width="300"/>
+<img src="./img/notUser.png" width="400"/>
 
 
 ### PUT API - data Update
@@ -145,9 +145,9 @@ server.put('/api/user/:id', (req, res) => {
 ````
 * postman에서 Headers를 
     * Content-Type : application/json 로 설정 후 api날려보기
-<img src="./img/put.png" width="300"/>
+<img src="./img/put.png" width="400"/>
 * 이제 다시 Get으로 모든 users 확인해보면 수정이 반영되어있다.
-<img src="./img/repair.png" width="300"/>
+<img src="./img/repair.png" width="400"/>
 
 
 ### DELETE API - data Delete
@@ -168,10 +168,10 @@ server.delete('/api/user/:id', (req, res) => {
 ...
 ````
 * 이제 특정 사용자의 아이디를 url담아서 delete api날리면
-<img src="./img/del.png" width="300"/>
+<img src="./img/del.png" width="400"/>
 
 * 그리고 다시 Get으로 모든 users 확인해보면 삭제가 반영되어있다.
-<img src="./img/delRet.png" width="300"/>
+<img src="./img/delRet.png" width="400"/>
  
 *** 
  
@@ -302,6 +302,6 @@ server.get('/', (req, res) => {
 ````
 
 * 이제 브라우저에서 "http://localhost:3000/"에 접속해보면 
-<img src="./img/createModel.png" width="300"/>
+<img src="./img/createModel.png" width="400"/>
 * 그리고 서버쪽에도 생성된 user가 찍힌다.
-<img src="./img/createUser.png" width="300"/>
+<img src="./img/createUser.png" width="600"/>
