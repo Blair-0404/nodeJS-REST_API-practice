@@ -1,0 +1,14 @@
+{
+  "name": "nodejs-rest-api",
+  "version": "1.0.0",
+  "description": "* rest api는 정보는 주고받는 자체라서 클라이언트에서 해주기보다는 서버에서 comfiguration만 해주면 된다. * nodeJS 다운받기, npm 다운받기 * node를 다운받으면 npm(node package manager) 이 같이 딸려오는데 이것은 node.js에서 필요한 모듈들을 다운받을 수 있게 도와주는 매니저이다.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "blair",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
