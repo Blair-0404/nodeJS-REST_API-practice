@@ -176,7 +176,7 @@ server.delete('/api/user/:id', (req, res) => {
 ## MongoDB 구축하기 (useMongoDB 경로에서 작업)
 * 로그인 후 클러스터 생성하기
 * connect
-    * 중요한 프젝은 아니기때문에 0.0.0.0로 모든 아이피 허용 / root/123
+    * 중요한 프젝은 아니기때문에 0.0.0.0로 모든 아이피 허용 
     
 
 ### 새 폴더 만들고 셋업하기 - useMongoDB 폴더생성
